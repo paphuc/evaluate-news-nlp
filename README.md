@@ -64,7 +64,7 @@ const apiKey = process.env.API_KEY;
 
 ### Step 3: Using the API
 
-We're ready to go! The API has a lot of different endpoints you can take a look at [here](https://learn.meaningcloud.com/developer/sentiment-analysis/2.1/doc/request).
+We're ready to go! The API has a lot of different endpoints you can take a look at [here](https://www.meaningcloud.com/developer/apis).
 
 I won't provide further examples here, as it's up to you to create the various requests and make sure your server is set up appropriately.
 

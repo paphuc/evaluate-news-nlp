@@ -7,8 +7,11 @@ function checkForName(inputText) {
         "Archer",
         "Georgiou"
     ]
-
-    if(names.includes(inputText)) {
+    if (input == "") {
+        alert("Name should not be empty")
+        return
+    }
+    if (names.includes(inputText)) {
         alert("Welcome, Captain!")
     }
 }

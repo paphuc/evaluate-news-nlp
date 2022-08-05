@@ -6,10 +6,17 @@ const mockAPIResponse = require('./mockAPI.js')
 const dotenv = require('dotenv');
 dotenv.config();
 const apiKey = process.env.API_KEY;
-const baseURL = 'https://api.meaningcloud.com/lang-4.0/identification';
+const baseURL = 'https://api.meaningcloud.com/sentiment-2.1';
 const cors = require('cors');
 
 const app = express()
+
+const bodyParser = require('body-parser');
+
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.use(cors());
 app.use(express.static('dist'))
 
@@ -27,11 +34,13 @@ app.listen(8080, function() {
 
 const postData = async(url = '', data = {}) => {
     let formData = new FormData();
-    formData.append('txt', data.message);
+    formData.append('of', "json");
+    formData.append('lang', "en");
     formData.append('key', apiKey);
+    formData.append('url', data.url);
     const response = await fetch(url, {
         method: 'POST',
-        body: formData, // body data type must match "Content-Type" header        
+        body:  formData, // body data type must match "Content-Type" header        
     });
     try {
         const newData = await response.json();
@@ -41,9 +50,15 @@ const postData = async(url = '', data = {}) => {
         // appropriately handle the error
     }
 }
-app.get('/test', async function(req, res) {
+
+app.post('/sentiment',  async function(req, res) {
     let response = await postData(baseURL, {
-        "message": req.query.message,
+        "url": req.body.url,
     })
-    res.send({"message":response["language_list"][0].name})
+    console.log(response)
+
+    res.send({
+        "subjectivity":response["subjectivity"],
+        "irony": response["irony"]
+    })
 })

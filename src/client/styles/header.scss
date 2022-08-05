@@ -1,5 +1,14 @@
-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 40px;
+.header {
+    grid-area: hd;
+    padding: 60px;
+    text-align: center;
+    background: #009B77;
+    color: white;
+    font-size: 30px;
+}
+
+@media only screen and (max-width: 400px) {
+    .header {
+        width: 100%;
+    }
 }

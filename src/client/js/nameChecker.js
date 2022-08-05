@@ -7,7 +7,7 @@ function checkForName(inputText) {
         "Archer",
         "Georgiou"
     ]
-    if (input == "") {
+    if (inputText == "") {
         alert("Name should not be empty")
         return
     }
